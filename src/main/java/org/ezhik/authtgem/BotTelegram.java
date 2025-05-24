@@ -163,8 +163,14 @@ public class BotTelegram extends TelegramLongPollingBot {
                                     this.sendMessage(update.getMessage().getChatId(), AuthTGEM.messageTG.get("account_already_tgasign_round"));
                                 }
                             } else {
-                                GeyserApiBase api = Geyser.api();
-                                if (this.notRegAndLogin || api.isBedrockPlayer(uuid)) {
+                                GeyserApiBase api;
+                                try {
+                                    api = Geyser.api();
+                                } catch (Error error) {
+                                    api = null;
+                                    System.out.println("[AuthTG] Please, download GeyserMC and floodgate | Пожалуйста,загрузить GeyserMC и floodgate");
+                                }
+                                if (this.notRegAndLogin || api != null && api.isBedrockPlayer(uuid)) {
                                     User.register(update.getMessage(), uuid);
                                     nextStep.put(update.getMessage().getChatId().toString(), "none");
                                 } else {

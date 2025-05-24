@@ -6,6 +6,8 @@ Author: 'Ezhik24'
 website: 'https://t.me/ezhichek11'
 
 commands:
+  logout:
+    description: 'Выйти с аккаунта'
   tellfriends:
     description: 'Отправить сообщение друзьям в телеграмм'
   listfriends:

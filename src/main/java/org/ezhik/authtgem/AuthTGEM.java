@@ -49,6 +49,7 @@ public final class AuthTGEM extends JavaPlugin {
         getCommand("listfriends").setExecutor(new ListFriendsCMD());
         getCommand("tellfriends").setExecutor(new TellFriendsCMD());
         getCommand("mcbc").setExecutor(new MCbcCMD());
+        getCommand("logout").setExecutor(new LogoutCMD());
         bot = new BotTelegram();
         if (bot.getBotToken() == "changeme" && bot.getBotUsername() == "changeme") {
             System.out.println("Please set your bot token and username in config.yml");

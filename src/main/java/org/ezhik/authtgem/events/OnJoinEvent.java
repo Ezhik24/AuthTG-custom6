@@ -20,22 +20,28 @@ public class OnJoinEvent implements Listener {
         File file = new File("plugins/Minetelegram/users/" + p.getUniqueId() + ".yml");
         YamlConfiguration userconfig = YamlConfiguration.loadConfiguration(file);
         User user;
-        GeyserApiBase api = Geyser.api();
-        System.out.println(api.isBedrockPlayer(p.getUniqueId()));
-        System.out.println(!api.isBedrockPlayer(p.getUniqueId()));
-        System.out.println(p.getName());
-        System.out.println(api.onlineConnections());
+        GeyserApiBase api;
+        try {
+            api = Geyser.api();
+        } catch (Error error) {
+            api = null;
+            System.out.println("[AuthTG] Please, download GeyserMC and floodgate | Пожалуйста,загрузить GeyserMC и floodgate");
+       }
         if (userconfig.getString("ipAddress") != null && userconfig.getString("ipAddress").equals(p.getAddress().getAddress().toString())) {
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&l[&b&lMT&f&l] &a&lУспешная авторизация"));
         } else {
-            System.out.println("Test1");
             FreezerEvent.freezeplayer(p.getName());
-            if (api.isBedrockPlayer(p.getUniqueId())) {
-                System.out.println("Test2(fd)");
-                p.sendTitle(ChatColor.translateAlternateColorCodes('&', "&c&lПривяжи аккаунт"), "Введите команду /start в боту", 0, 10000000, 0);
-                MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', "&c&lПривяжи аккаунт к боту"));
+            if (api != null && api.isBedrockPlayer(p.getUniqueId())) {
+                user = User.getUser(p.getUniqueId());
+                if (userconfig.getBoolean("active")) {
+                    user.sendLoginAccepted("Это вы вошли в игру?");
+                    p.sendTitle(ChatColor.translateAlternateColorCodes('&', "Потвердите вход"), "через Телеграм", 20, 1000000000, 0);
+                    MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', "&a&lПотвердите вход через телеграм"));
+                } else {
+                    p.sendTitle(ChatColor.translateAlternateColorCodes('&', "&c&lПривяжи аккаунт"), "Введите команду /start в боту", 0, 10000000, 0);
+                    MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', "&c&lПривяжи аккаунт к боту"));
+                }
             } else {
-                System.out.println("Test2(notfd)");
                 if (AuthTGEM.bot.authNecessarily) user = User.getUser(p.getUniqueId());
                 else user = User.getUserJoin(p.getUniqueId());
                 if (!AuthTGEM.bot.notRegAndLogin) {
