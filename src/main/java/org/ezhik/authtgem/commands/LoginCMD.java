@@ -36,7 +36,7 @@ public class LoginCMD implements CommandExecutor {
         }
         User user = User.getUser(p.getUniqueId());
         if (AuthTGEM.bot.authNecessarily) {
-            if (commandSender.hasPermission("minetelegram.auth.bypass")) {
+            if (userconfig.getBoolean("bypass")) {
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&l[&b&lMT&f&l] &a&lВы успешно вошли"));
                 p.resetTitle();
                 FreezerEvent.unfreezeplayer(p.getName());

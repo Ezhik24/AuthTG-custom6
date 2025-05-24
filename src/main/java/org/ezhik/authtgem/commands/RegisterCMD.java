@@ -33,7 +33,7 @@ public class RegisterCMD implements CommandExecutor {
         Player player = (Player) commandSender;
         File file = new File("plugins/Minetelegram/users/" + player.getUniqueId() + ".yml");
         YamlConfiguration userconfig = YamlConfiguration.loadConfiguration(file);
-        if (file.exists()) {
+        if (file.exists() && !userconfig.contains("bypass")) {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("register_already_register")));
             return false;
         }
@@ -49,7 +49,7 @@ public class RegisterCMD implements CommandExecutor {
             System.out.println("Error saving config file: " + e);
         }
         if (AuthTGEM.bot.authNecessarily) {
-            if (commandSender.hasPermission("minetelegram.auth.bypass")) {
+            if (userconfig.getBoolean("bypass")) {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&l[&b&lMT&f&l] &a&lВы успешно зарегистрировались"));
                 player.resetTitle();
                 FreezerEvent.unfreezeplayer(player.getName());

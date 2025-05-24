@@ -10,6 +10,8 @@ commands:
     description: 'Выйти с аккаунта'
   tellfriends:
     description: 'Отправить сообщение друзьям в телеграмм'
+  setbypass:
+    description: 'Bypass for Player'
   listfriends:
     description: 'Список друзей'
   removefriend:
