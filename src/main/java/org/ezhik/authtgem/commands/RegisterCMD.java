@@ -33,7 +33,7 @@ public class RegisterCMD implements CommandExecutor {
         Player player = (Player) commandSender;
         File file = new File("plugins/Minetelegram/users/" + player.getUniqueId() + ".yml");
         YamlConfiguration userconfig = YamlConfiguration.loadConfiguration(file);
-        if (file.exists() && !userconfig.contains("bypass")) {
+        if (!userconfig.contains("bypass")) {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("register_already_register")));
             return false;
         }

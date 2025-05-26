@@ -26,7 +26,7 @@ public class OnJoinEvent implements Listener {
         } catch (Error error) {
             api = null;
             System.out.println("[AuthTG] Please, download GeyserMC and floodgate | Пожалуйста,загрузить GeyserMC и floodgate");
-       }
+        }
         if (userconfig.getString("ipAddress") != null && userconfig.getString("ipAddress").equals(p.getAddress().getAddress().toString())) {
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&l[&b&lMT&f&l] &a&lУспешная авторизация"));
         } else {
@@ -45,7 +45,7 @@ public class OnJoinEvent implements Listener {
                 if (AuthTGEM.bot.authNecessarily) user = User.getUser(p.getUniqueId());
                 else user = User.getUserJoin(p.getUniqueId());
                 if (!AuthTGEM.bot.notRegAndLogin) {
-                    if (user != null || userconfig.contains("password")) {
+                    if (userconfig.contains("password")) {
                         MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_message")));
                         p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_title_login_s1")), AuthTGEM.messageMC.get("login_title_login_s2"), 20, 10000000, 0);
                     } else {
@@ -53,6 +53,7 @@ public class OnJoinEvent implements Listener {
                         p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("register_title_s1")), AuthTGEM.messageMC.get("register_title_s2"), 20, 10000000, 0);
                     }
                     if (user != null) {
+                        user.sendMessage("Ваш аккаунт вошёл в игру");
                         for (User u : user.getUnicFriends()) {
                             u.sendMessageB(AuthTGEM.messageTG.getPNFriendOnJoin(p.getPlayer()), p.getName());
                         }

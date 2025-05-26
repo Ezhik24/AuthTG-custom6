@@ -98,8 +98,7 @@ public class MessageTranslationTG extends LinkedHashMap<String, String> {
         return this.get("tellfriends_message_succes").replace("{PLAYER}", user.playername);
     }
 
-    public String getPlayerNameSM(Long chatid) {
-        User user = User.getCurrentUser(chatid);
+    public String getPlayerNameSM(User user) {
         return this.get("sendMessage_prefix").replace("{PLAYER}", user.playername);
     }
 

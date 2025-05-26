@@ -20,11 +20,11 @@ commands:
     description: 'Добавить  в друзья'
   code:
     description: 'Код потверждения'
-  registers:
+  register:
     description: 'Регистрация'
     aliases:
       - 'reg'
-  logins:
+  login:
     description: 'Вход'
     aliases:
       - 'l'

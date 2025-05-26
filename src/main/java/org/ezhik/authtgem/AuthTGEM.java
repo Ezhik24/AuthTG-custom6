@@ -26,7 +26,6 @@ public final class AuthTGEM extends JavaPlugin {
         System.out.println("[AuthTG] Please,subscribe for my telegram channel https://t.me/ezhichek11");
         System.out.println("[AuthTG] Плагин включен!");
         System.out.println("[AuthTG] Plugin enabled!");
-        System.out.println("[AuthTG] Version: Beta-Test FloodGate");
         Bukkit.getServer().getPluginManager().registerEvents(new FreezerEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new OnJoinEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new MuterEvent(), this);
@@ -36,11 +35,12 @@ public final class AuthTGEM extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new BlockPlaceBEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new BlockDropBEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoinAnotherEvent(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new TestEvent(), this);
         Handler handler = new Handler();
         handler.runTaskTimer(this,0,1);
         getCommand("code").setExecutor(new CodeCMD());
-        getCommand("registers").setExecutor(new RegisterCMD());
-        getCommand("logins").setExecutor(new LoginCMD());
+        getCommand("register").setExecutor(new RegisterCMD());
+        getCommand("login").setExecutor(new LoginCMD());
         getCommand("changepassword").setExecutor(new ChangepasswordCMD());
         getCommand("setpassword").setExecutor(new SetPasswordCMD());
         getCommand("tgbc").setExecutor(new TgbcCMD());

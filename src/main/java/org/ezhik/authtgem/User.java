@@ -116,7 +116,7 @@ public class User {
     }
 
     public void sendMessage(String message) {
-        AuthTGEM.bot.sendMessage(this.chatid, AuthTGEM.messageTG.getPlayerNameSM(this.chatid) + message);
+        AuthTGEM.bot.sendMessage(this.chatid, AuthTGEM.messageTG.getPlayerNameSM(this) + message);
     }
 
     public static List<User> getUserList(){
