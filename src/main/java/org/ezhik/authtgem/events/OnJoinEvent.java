@@ -32,11 +32,8 @@ public class OnJoinEvent implements Listener {
         } else {
             FreezerEvent.freezeplayer(p.getName());
             if (api != null && api.isBedrockPlayer(p.getUniqueId())) {
-                user = User.getUser(p.getUniqueId());
                 if (userconfig.getBoolean("active")) {
-                    user.sendLoginAccepted("Это вы вошли в игру?");
-                    p.sendTitle(ChatColor.translateAlternateColorCodes('&', "Потвердите вход"), "через Телеграм", 20, 1000000000, 0);
-                    MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', "&a&lПотвердите вход через телеграм"));
+                    FreezerEvent.unfreezeplayer(p.getName());
                 } else {
                     p.sendTitle(ChatColor.translateAlternateColorCodes('&', "&c&lПривяжи аккаунт"), "Введите команду /start в боту", 0, 10000000, 0);
                     MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', "&c&lПривяжи аккаунт к боту"));

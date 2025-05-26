@@ -117,13 +117,13 @@ public class BotTelegram extends TelegramLongPollingBot {
                     else
                         this.sendMessage(update.getMessage().getChatId(), AuthTGEM.messageTG.get("resetpass_player_notfound"));
                 }
-                if (update.getMessage().getText().toString().equals("/tfoff") && !this.authNecessarily) {
+                if (update.getMessage().getText().toString().equals("/tfoff")) {
                     User user = User.getOnlineUser(update.getMessage().getChatId());
                     if (user != null) user.setTwofactor(false);
                     else
                         this.sendMessage(update.getMessage().getChatId(), AuthTGEM.messageTG.get("tfoff_player_notfound"));
                 }
-                if (update.getMessage().getText().toString().equals("/tfon") && !this.authNecessarily) {
+                if (update.getMessage().getText().toString().equals("/tfon")) {
                     User user = User.getOnlineUser(update.getMessage().getChatId());
                     if (user != null) user.setTwofactor(true);
                     else

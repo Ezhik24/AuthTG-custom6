@@ -6,6 +6,8 @@ Author: 'Ezhik24'
 website: 'https://t.me/ezhichek11'
 
 commands:
+  unregister:
+    description: 'Удалить аккаунт'
   logout:
     description: 'Выйти с аккаунта'
   tellfriends:

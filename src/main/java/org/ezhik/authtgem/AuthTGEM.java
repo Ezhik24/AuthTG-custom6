@@ -1,12 +1,10 @@
 package org.ezhik.authtgem;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.ezhik.authtgem.commands.*;
 import org.ezhik.authtgem.events.*;
-import org.ezhik.authtgem.message.MessageTranslationMC;
-import org.ezhik.authtgem.message.MessageTranslationTG;
+import org.ezhik.authtgem.message.*;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
@@ -51,21 +49,20 @@ public final class AuthTGEM extends JavaPlugin {
         getCommand("mcbc").setExecutor(new MCbcCMD());
         getCommand("logout").setExecutor(new LogoutCMD());
         getCommand("setbypass").setExecutor(new SetBypass());
+        getCommand("unregister").setExecutor(new UnRegisterCMD());
         bot = new BotTelegram();
         if (bot.getBotToken() == "changeme" && bot.getBotUsername() == "changeme") {
             System.out.println("Please set your bot token and username in config.yml");
             System.out.println("Пожалуйста, укажите ваш токен и имя в config.yml");
         } else {
-            TelegramBotsApi botsApi = null;
+            TelegramBotsApi botsApi;
             try {
                 botsApi = new TelegramBotsApi(DefaultBotSession.class);
                 botsApi.registerBot(bot);
             } catch (TelegramApiException e) {
                 throw new RuntimeException(e);
             }
-
         }
-
     }
 
     @Override
@@ -75,6 +72,4 @@ public final class AuthTGEM extends JavaPlugin {
         System.out.println("[AuthTG] Плагин выключен!");
         System.out.println("[AuthTG] Plugin disabled!");
     }
-
-
 }
