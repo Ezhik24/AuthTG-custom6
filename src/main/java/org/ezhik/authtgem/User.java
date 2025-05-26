@@ -86,7 +86,7 @@ public class User {
         userconfig.set("firstname", message.getChat().getFirstName());
         userconfig.set("lastname", message.getChat().getLastName());
         userconfig.set("active", false);
-        userconfig.set("twofactor", true);
+        userconfig.set("twofactor", false);
         try {
             userconfig.save(file);
         } catch (IOException e) {
