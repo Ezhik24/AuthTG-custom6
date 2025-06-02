@@ -27,7 +27,7 @@ public class OnJoinEvent implements Listener {
             api = null;
             System.out.println("[AuthTG] Please, download GeyserMC and floodgate | Пожалуйста,загрузить GeyserMC и floodgate");
         }
-        if (userconfig.getString("ipAddress") != null && userconfig.getString("ipAddress").equals(p.getAddress().getAddress().toString())) {
+        if (userconfig.getBoolean("active") && userconfig.getString("ipAddress") != null && userconfig.getString("ipAddress").equals(p.getAddress().getAddress().toString())) {
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&l[&b&lMT&f&l] &a&lУспешная авторизация"));
         } else {
             FreezerEvent.freezeplayer(p.getName());
@@ -35,28 +35,26 @@ public class OnJoinEvent implements Listener {
                 if (userconfig.getBoolean("active")) {
                     FreezerEvent.unfreezeplayer(p.getName());
                 } else {
-                    p.sendTitle(ChatColor.translateAlternateColorCodes('&', "&c&lПривяжи аккаунт"), "Введите команду /start в боту", 0, 10000000, 0);
-                    MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', "&c&lПривяжи аккаунт к боту"));
+                    p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("account_auth_nessery1")), AuthTGEM.messageMC.get("account_auth_nessery2"), 0, 10000000, 0);
+                    MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("account_auth_nessery_message")));
                 }
             } else {
                 if (AuthTGEM.bot.authNecessarily) user = User.getUser(p.getUniqueId());
                 else user = User.getUserJoin(p.getUniqueId());
-                if (!AuthTGEM.bot.notRegAndLogin) {
-                    if (userconfig.contains("password")) {
-                        MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_message")));
-                        p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_title_login_s1")), AuthTGEM.messageMC.get("login_title_login_s2"), 20, 10000000, 0);
-                    } else {
-                        MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("register_message")));
-                        p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("register_title_s1")), AuthTGEM.messageMC.get("register_title_s2"), 20, 10000000, 0);
+                if (userconfig.contains("password")) {
+                    MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_message")));
+                    p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_title_login_s1")), AuthTGEM.messageMC.get("login_title_login_s2"), 20, 10000000, 0);
+                } else {
+                    MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("register_message")));
+                    p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("register_title_s1")), AuthTGEM.messageMC.get("register_title_s2"), 20, 10000000, 0);
+                }
+                if (user != null) {
+                    user.sendMessage(AuthTGEM.messageTG.get("user_login"));
+                    for (User u : user.getUnicFriends()) {
+                        u.sendMessageB(AuthTGEM.messageTG.getPNFriendOnJoin(p.getPlayer()), p.getName());
                     }
-                    if (user != null) {
-                        user.sendMessage("Ваш аккаунт вошёл в игру");
-                        for (User u : user.getUnicFriends()) {
-                            u.sendMessageB(AuthTGEM.messageTG.getPNFriendOnJoin(p.getPlayer()), p.getName());
-                        }
-                    } else {
-                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("joinplayer_tgasign")));
-                    }
+                } else {
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("joinplayer_tgasign")));
                 }
             }
         }

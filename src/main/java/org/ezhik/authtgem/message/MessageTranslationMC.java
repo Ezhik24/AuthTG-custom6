@@ -40,7 +40,7 @@ public class MessageTranslationMC extends LinkedHashMap<String, String> {
             this.put("changepassword_newpasswd_wrong", "&f&l[&b&lMT&f&l] &c&lПароли не совпадают");
             this.put("changepassword_wrong_command", "&f&l[&b&lMT&f&l] &c&lКоманда введена неверно. Введите команду  так: /changepassword <старый пароль> <новый пароль>");
             this.put("code_wrong_command", "&f&l[&b&lMT&f&l] &c&lКоманда введена неверно. Введите команду так: /code <код>");
-            this.put("code_account_deactivated", "&f&l[&b&lMT&f&l] &c&lАккаунт был успешно деактивирован");
+            this.put("code_account_deactivated", "Аккаунт был успешно удалён");
             this.put("code_account_activated", "&f&l[&b&lMT&f&l] &a&lАккаунт был успешно активирован");
             this.put("code_invalid", "&f&l[&b&lMT&f&l] &c&lНеверный код. Попробуйте еще раз.");
             this.put("login_successful_login", "&f&l[&b&lMT&f&l] &a&lВы успешно вошли в игру");
@@ -87,6 +87,19 @@ public class MessageTranslationMC extends LinkedHashMap<String, String> {
             this.put("mcbc_success","&f&l[&b&lMT&f&l] &a&lУспешно отправлено!");
             this.put("mcbc","&f&l[&b&lMT&f&l] &a&l");
             this.put("mcbc_nopermission", "&f&l[&b&lMT&f&l] &c&lУ вас нет прав для использования этой команды");
+            this.put("logout", "Вы успешно вышли с аккаунта");
+            this.put("setbypass_player_noperm", "&f&l[&b&lMT&f&l] &c&lУ вас нет доступа");
+            this.put("setbypass_player_wrongcmd", "&f&l[&b&lMT&f&l] &c&lКоманда введена неверна,введите: /setbypass <ник>");
+            this.put("setbypass_console_wrongcmd", "[AuthTG] Команда введена неверна,введите: /setbypass <ник>");
+            this.put("setbypass_player_approve", "&f&l[&b&lMT&f&l] &aДанный игрок не зарегистрирован,если вы действительно хотите выдать bypass введите команду еще раз");
+            this.put("setbypass_console_approve", "[AuthTG] Данный игрок не зарегистрирован,если вы действительно хотите выдать bypass введите команду еще раз");
+            this.put("setbypass_player_success", "&f&l[&b&lMT&f&l] &aУспешно!");
+            this.put("setbypass_console_success", "Успешно");
+            this.put("unregister_success", "Вы успешно удалили аккаунт");
+            this.put("unregister_approve", "&f&l[&b&lMT&f&l] &c&lЕсли вы действительно хотите удалить аккаунт, введите команду ещё раз");
+            this.put("unregister_success_pl_another", "Вам удалили аккаунт");
+            this.put("unregister_success_another", "&f&l[&b&lMT&f&l] &a&lВы успешно удалили аккаунт {PLAYER}");
+            this.put("unregister_noperm", "&f&l[&b&lMT&f&l] &c&lУ вас нет разрешения");
             File newconfigfile = new File("plugins/Minetelegram/messages/messageMC_RU.yml");
             YamlConfiguration newmessageconfig = new YamlConfiguration();
             for (String key : this.keySet()) {
@@ -123,9 +136,8 @@ public class MessageTranslationMC extends LinkedHashMap<String, String> {
         return this.get("removefriend_friend_succes").replace("{PLAYER}", player.getName());
     }
 
-    public String getHashtagPN(Long chatid) {
-        User user = User.getCurrentUser(chatid);
-        return this.get("hashtag_sendmsg_minecraft").replace("{PLAYER}", user.playername);
+    public String getPlayerUnregister(Player player) {
+        return this.get("unregister_success_another").replace("{PLAYER}", player.getName());
     }
 
     public String getSendMCmsgPN(Long chatid) {

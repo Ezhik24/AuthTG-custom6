@@ -68,6 +68,7 @@ public class MessageTranslationTG extends LinkedHashMap<String, String> {
             this.put("sendmsg_message","Сообщение от пользователя {PLAYER} : ");
             this.put("addfriend_succesadd","Вам добавлен в друзья {PLAYER}");
             this.put("acc_choose","[Бот] Выбран игрок {PLAYER}");
+            this.put("user_login", "Ваш аккаунт вошёл в игру");
             File newconfigfile = new File("plugins/Minetelegram/messages/messageTG_RU.yml");
             YamlConfiguration newmessageconfig = new YamlConfiguration();
             for (String key : this.keySet()) {

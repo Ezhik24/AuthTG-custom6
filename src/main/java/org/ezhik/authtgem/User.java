@@ -251,7 +251,6 @@ public class User {
         this.sendMessage(AuthTGEM.messageTG.getCodeDeActivated(code));
         this.player.sendMessage( ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("code_deactivated_acc")));
         CodeCMD.code.put(this.player.getUniqueId(), code);
-
     }
 
     public static List<String> getPlayerNames(Long chatid) {

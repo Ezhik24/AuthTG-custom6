@@ -19,10 +19,6 @@ import java.io.IOException;
 public class LoginCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (AuthTGEM.bot.notRegAndLogin) {
-            commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&l[&b&lMT&f&l] &c&lФункция выключена"));
-            return false;
-        }
         if (strings.length != 1) {
             commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_wrong_command")));
             return false;
@@ -37,7 +33,7 @@ public class LoginCMD implements CommandExecutor {
         User user = User.getUser(p.getUniqueId());
         if (AuthTGEM.bot.authNecessarily) {
             if (userconfig.getBoolean("bypass")) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&l[&b&lMT&f&l] &a&lВы успешно вошли"));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_successful_login")));
                 p.resetTitle();
                 FreezerEvent.unfreezeplayer(p.getName());
                 MuterEvent.unmute(p.getName());

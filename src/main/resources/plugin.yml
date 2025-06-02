@@ -8,6 +8,8 @@ website: 'https://t.me/ezhichek11'
 commands:
   unregister:
     description: 'Удалить аккаунт'
+    aliases:
+      - unreg
   logout:
     description: 'Выйти с аккаунта'
   tellfriends:

@@ -34,7 +34,6 @@ public class BotTelegram extends TelegramLongPollingBot {
     public boolean authNecessarily = false;
     public Long adminChatID = 0L;
     public Integer threadChatID = 0;
-    public boolean notRegAndLogin = false;
 
     public BotTelegram() {
         YamlConfiguration config = new YamlConfiguration();
@@ -45,7 +44,6 @@ public class BotTelegram extends TelegramLongPollingBot {
             config.set("authNecessarily", authNecessarily);
             config.set("adminChatID", adminChatID);
             config.set("threadChatID", threadChatID);
-            config.set("notRegAndLogin", notRegAndLogin);
             try {
                 config.save(file);
             } catch (Exception e) {
@@ -64,7 +62,6 @@ public class BotTelegram extends TelegramLongPollingBot {
             authNecessarily = config.getBoolean("authNecessarily");
             adminChatID = config.getLong("adminChatID");
             threadChatID = config.getInt("threadChatID");
-            notRegAndLogin = config.getBoolean("notRegAndLogin");
         }
     }
 
@@ -105,7 +102,7 @@ public class BotTelegram extends TelegramLongPollingBot {
                     } else
                         this.sendMessage(update.getMessage().getChatId(), AuthTGEM.messageTG.get("kickme_player_notfound"));
                 }
-                if (update.getMessage().getText().toString().equals("/unlink") && !this.authNecessarily) {
+                if (update.getMessage().getText().toString().equals("/unlink")) {
                     User user = User.getOnlineUser(update.getMessage().getChatId());
                     if (user == null)
                         this.sendMessage(update.getMessage().getChatId(), AuthTGEM.messageTG.get("unlink_player_notfound"));
@@ -170,7 +167,7 @@ public class BotTelegram extends TelegramLongPollingBot {
                                     api = null;
                                     System.out.println("[AuthTG] Please, download GeyserMC and floodgate | Пожалуйста,загрузить GeyserMC и floodgate");
                                 }
-                                if (this.notRegAndLogin || api != null && api.isBedrockPlayer(uuid)) {
+                                if (api != null && api.isBedrockPlayer(uuid)) {
                                     User.register(update.getMessage(), uuid);
                                     nextStep.put(update.getMessage().getChatId().toString(), "none");
                                 } else {

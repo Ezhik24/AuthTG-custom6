@@ -5,9 +5,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.ezhik.authtgem.AuthTGEM;
 import org.ezhik.authtgem.Handler;
 
 import java.io.File;
+import java.io.IOException;
 
 public class LogoutCMD implements CommandExecutor {
     @Override
@@ -16,7 +18,12 @@ public class LogoutCMD implements CommandExecutor {
         File file = new File("plugins/Minetelegram/users/" + player.getUniqueId() + ".yml");
         YamlConfiguration userconfig = YamlConfiguration.loadConfiguration(file);
         userconfig.set("ipAddress", "none");
-        Handler.kick(player.getName(), "Вы успешно вышли с аккаунта");
+        Handler.kick(player.getName(), AuthTGEM.messageMC.get("logout"));
+        try {
+            userconfig.save(file);
+        } catch (IOException e) {
+            System.out.println("Error saving file " + e);
+        }
         return true;
     }
 }

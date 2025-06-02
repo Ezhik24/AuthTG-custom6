@@ -22,10 +22,6 @@ public class RegisterCMD implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (AuthTGEM.bot.notRegAndLogin) {
-            commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&l[&b&lMT&f&l] &c&lФункция выключена"));
-            return false;
-        }
         if (strings.length < 2) {
             commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("register_wrong_command")));
             return false;
@@ -50,7 +46,7 @@ public class RegisterCMD implements CommandExecutor {
         }
         if (AuthTGEM.bot.authNecessarily) {
             if (userconfig.getBoolean("bypass")) {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&l[&b&lMT&f&l] &a&lВы успешно зарегистрировались"));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("register_successful_register")));
                 player.resetTitle();
                 FreezerEvent.unfreezeplayer(player.getName());
                 MuterEvent.unmute(player.getName());
