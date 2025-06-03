@@ -100,6 +100,9 @@ public class MessageTranslationMC extends LinkedHashMap<String, String> {
             this.put("unregister_success_pl_another", "Вам удалили аккаунт");
             this.put("unregister_success_another", "&f&l[&b&lMT&f&l] &a&lВы успешно удалили аккаунт {PLAYER}");
             this.put("unregister_noperm", "&f&l[&b&lMT&f&l] &c&lУ вас нет разрешения");
+            this.put("account_auth_nessery1_bed","&c&lПривяжи аккаунт");
+            this.put("account_auth_nessery2_bed", "прочитай чат");
+            this.put("account_auth_nessery_message_bed", "&f&l[&b&lMT&f&l] Привяжите аккаунт,написа боту код: {CODE}");
             File newconfigfile = new File("plugins/Minetelegram/messages/messageMC_RU.yml");
             YamlConfiguration newmessageconfig = new YamlConfiguration();
             for (String key : this.keySet()) {
@@ -129,6 +132,10 @@ public class MessageTranslationMC extends LinkedHashMap<String, String> {
 
     public String getFriendNameRemove(String friendname) {
         return this.get("removefriend_succes_remove").replace("{PLAYER}", friendname);
+    }
+
+    public String getCodeBedrock(String code) {
+        return this.get("account_auth_nessery_message_bed").replace("{CODE}", code);
     }
 
     public String getFriendRemovePN(CommandSender commandSender) {
