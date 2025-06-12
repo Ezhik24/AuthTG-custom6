@@ -31,6 +31,7 @@ public class BotTelegram extends TelegramLongPollingBot {
     private static Map<String, UUID> playerUUID = new HashMap<>();
     private Map<String, String> sendMessageData = new HashMap<>();
     public static Map<String, String> curentplayer = new HashMap<>();
+    public static Map<UUID,String> bedrockPlayer = new HashMap<>();
     public boolean authNecessarily = false;
     public Long adminChatID = 0L;
     public Integer threadChatID = 0;
@@ -134,6 +135,17 @@ public class BotTelegram extends TelegramLongPollingBot {
                 }
                 this.deleteMessage(update.getMessage());
             } else {
+                if (!bedrockPlayer.isEmpty()) {
+                    for (Map.Entry<UUID,String> map : bedrockPlayer.entrySet()) {
+                        UUID uuid = map.getKey();
+                        String key = map.getValue();
+                        if (update.getMessage().getText().equals(key)) {
+                            User.registerBedrock(update.getMessage(),uuid);
+                            User user = User.getUser(uuid);
+                            user.sendMessage(AuthTGEM.messageTG.get("code_account_activated"));
+                        }
+                    }
+                }
                 if (nextStep.containsKey(update.getMessage().getChatId().toString())) {
                     if (nextStep.get(update.getMessage().getChatId().toString()).equals("askpassword")) {
                         String password = update.getMessage().getText().toString().replace(" ", "").replace("\n", "");

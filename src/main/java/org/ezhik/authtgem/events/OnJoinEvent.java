@@ -7,11 +7,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.ezhik.authtgem.AuthTGEM;
+import org.ezhik.authtgem.BotTelegram;
 import org.ezhik.authtgem.User;
 import org.geysermc.api.Geyser;
 import org.geysermc.api.GeyserApiBase;
 
 import java.io.File;
+import java.io.IOException;
 
 public class OnJoinEvent implements Listener {
     @EventHandler
@@ -35,8 +37,15 @@ public class OnJoinEvent implements Listener {
                 if (userconfig.getBoolean("active")) {
                     FreezerEvent.unfreezeplayer(p.getName());
                 } else {
-                    p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("account_auth_nessery1")), AuthTGEM.messageMC.get("account_auth_nessery2"), 0, 10000000, 0);
-                    MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("account_auth_nessery_message")));
+                    p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("account_auth_nessery1_bed")), AuthTGEM.messageMC.get("account_auth_nessery2_bed"), 0, 10000000, 0);
+                    String code = User.generateConfirmationCode();
+                    MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.getCodeBedrock(code)));
+                    BotTelegram.bedrockPlayer.put(p.getUniqueId(), code);
+                    try {
+                        userconfig.save(file);
+                    } catch (IOException e) {
+                        System.out.println("Error saving file: " + e);
+                    }
                 }
             } else {
                 if (AuthTGEM.bot.authNecessarily) user = User.getUser(p.getUniqueId());

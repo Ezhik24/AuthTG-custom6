@@ -6,6 +6,8 @@ import org.bukkit.Location;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.ezhik.authtgem.events.FreezerEvent;
+import org.ezhik.authtgem.events.MuterEvent;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -99,8 +101,36 @@ public class User {
         AuthTGEM.bot.sendMessage(message.getChatId(), AuthTGEM.messageTG.getCodeActivated(code));
         p.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("code_activate_acc")));
         CodeCMD.code.put(p.getUniqueId(), code);
-
     }
+
+    public static void registerBedrock(Message message, UUID uuid) {
+        Player p = Bukkit.getPlayer(uuid);
+        YamlConfiguration userconfig = new YamlConfiguration();
+        File file = new File("plugins/Minetelegram/users/" + p.getUniqueId() + ".yml");
+        try {
+            userconfig.load(file);
+        } catch (IOException e) {
+            System.out.println("Error loading config file: " + e);
+        } catch (InvalidConfigurationException e) {
+            System.out.println("Error parsing config file: " + e);
+        }
+        userconfig.set("ChatID", message.getChatId());
+        userconfig.set("username", message.getChat().getUserName());
+        userconfig.set("firstname", message.getChat().getFirstName());
+        userconfig.set("lastname", message.getChat().getLastName());
+        userconfig.set("active", false);
+        userconfig.set("twofactor", false);
+        try {
+            userconfig.save(file);
+        } catch (IOException e) {
+            System.out.println("Error saving config file: " + e);
+        }
+        FreezerEvent.unfreezeplayer(p.getName());
+        MuterEvent.unmute(p.getName());
+        p.resetTitle();
+    }
+
+
 
     public static void starcmd(Message message) {
         AuthTGEM.bot.sendMessage(message.getChatId(), AuthTGEM.messageTG.get("start_message"));
