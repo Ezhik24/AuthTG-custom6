@@ -106,7 +106,7 @@ public class User {
     public static void registerBedrock(Message message, UUID uuid) {
         Player p = Bukkit.getPlayer(uuid);
         YamlConfiguration userconfig = new YamlConfiguration();
-        File file = new File("plugins/Minetelegram/users/" + p.getUniqueId() + ".yml");
+        File file = new File("plugins/Minetelegram/users/" + uuid + ".yml");
         try {
             userconfig.load(file);
         } catch (IOException e) {
