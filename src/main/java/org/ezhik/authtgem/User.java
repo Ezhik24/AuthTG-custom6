@@ -36,7 +36,7 @@ public class User {
 
     private User(UUID uuid) {
         YamlConfiguration userconfig = new YamlConfiguration();
-        File file = new File("plugins/Minetelegram/users/" + uuid + ".yml");
+        File file = new File("plugins/AuthTG/users/" + uuid + ".yml");
         try {
             userconfig.load(file);
             this.uuid = uuid;
@@ -73,7 +73,7 @@ public class User {
     public static void register(Message message, UUID uuid) {
         Player p = Bukkit.getPlayer(uuid);
         YamlConfiguration userconfig = new YamlConfiguration();
-        File file = new File("plugins/Minetelegram/users/" + p.getUniqueId() + ".yml");
+        File file = new File("plugins/AuthTG/users/" + p.getUniqueId() + ".yml");
         try {
             userconfig.load(file);
         } catch (IOException e) {
@@ -93,7 +93,7 @@ public class User {
             System.out.println("Error saving config file: " + e);
         }
 
-        File oldfile = new File("plugins/Minetelegram/users/" + message.getChatId().toString() + ".yml");
+        File oldfile = new File("plugins/AuthTG/users/" + message.getChatId().toString() + ".yml");
         oldfile.delete();
         String code = generateConfirmationCode();
         AuthTGEM.bot.sendMessage(message.getChatId(), AuthTGEM.messageTG.getCodeActivated(code));
@@ -121,7 +121,7 @@ public class User {
 
     public static List<User> getUserList(){
         List<User> users = new ArrayList<>();
-        File folder = new File("plugins/Minetelegram/users");
+        File folder = new File("plugins/AuthTG/users");
         File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles) {
             if (file.isFile()) {
@@ -181,7 +181,7 @@ public class User {
     }
 
     public static User getUserJoin(UUID uuid) {
-        File file = new File("plugins/Minetelegram/users/" + uuid + ".yml");
+        File file = new File("plugins/AuthTG/users/" + uuid + ".yml");
         if (file.isFile()) {
             User user = new User(uuid);
             return user;
@@ -196,7 +196,7 @@ public class User {
 
     public void resetpassword() {
         YamlConfiguration userconf = new YamlConfiguration();
-        File file = new File("plugins/Minetelegram/users/" + this.player.getUniqueId() + ".yml");
+        File file = new File("plugins/AuthTG/users/" + this.player.getUniqueId() + ".yml");
         String password = generateConfirmationCode();
         try {
             userconf.load(file);
@@ -217,7 +217,7 @@ public class User {
 
     public void setTwofactor(boolean state) {
         YamlConfiguration userconf = new YamlConfiguration();
-        File file = new File("plugins/Minetelegram/users/" + this.player.getUniqueId() + ".yml");
+        File file = new File("plugins/AuthTG/users/" + this.player.getUniqueId() + ".yml");
         try {
             userconf.load(file);
         } catch (IOException e) {
@@ -314,7 +314,7 @@ public class User {
     public void addfriend(String friendname) {
         this.friends.add(friendname);
         YamlConfiguration userconf = new YamlConfiguration();
-        File file = new File("plugins/Minetelegram/users/" + this.player.getUniqueId() + ".yml");
+        File file = new File("plugins/AuthTG/users/" + this.player.getUniqueId() + ".yml");
         try {
             userconf.load(file);
         } catch (IOException e) {
@@ -334,7 +334,7 @@ public class User {
     public void remFriendFromConf(String friendname) {
         this.friends.remove(friendname);
         YamlConfiguration userconf = new YamlConfiguration();
-        File file = new File("plugins/Minetelegram/users/" + this.uuid + ".yml");
+        File file = new File("plugins/AuthTG/users/" + this.uuid + ".yml");
         try {
             userconf.load(file);
         } catch (IOException e) {
@@ -408,7 +408,7 @@ public class User {
         }
     }
     public static String findPlayerTG(String playername) {
-        File[] files = new File("plugins/Minetelegram/users/").listFiles();
+        File[] files = new File("plugins/AuthTG/users/").listFiles();
         for (File file : files) {
             YamlConfiguration userconf = new YamlConfiguration();
             try {

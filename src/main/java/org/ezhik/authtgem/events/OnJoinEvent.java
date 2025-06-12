@@ -17,7 +17,7 @@ public class OnJoinEvent implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
-        File file = new File("plugins/Minetelegram/users/" + p.getUniqueId() + ".yml");
+        File file = new File("plugins/AuthTG/users/" + p.getUniqueId() + ".yml");
         YamlConfiguration userconfig = YamlConfiguration.loadConfiguration(file);
         User user;
         GeyserApiBase api;

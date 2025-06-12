@@ -36,7 +36,7 @@ public class SetBypass implements CommandExecutor {
             System.out.println(AuthTGEM.messageMC.get("setbypass_console_wrongcmd"));
         }
         Player player1 = Bukkit.getPlayer(strings[0]);
-        File file = new File("plugins/Minetelegram/users/" + player1.getUniqueId() + ".yml");
+        File file = new File("plugins/AuthTG/users/" + player1.getUniqueId() + ".yml");
         YamlConfiguration userconfig = new YamlConfiguration();
         try {
             userconfig.load(file);

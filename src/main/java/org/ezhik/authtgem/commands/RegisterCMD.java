@@ -27,7 +27,7 @@ public class RegisterCMD implements CommandExecutor {
             return false;
         }
         Player player = (Player) commandSender;
-        File file = new File("plugins/Minetelegram/users/" + player.getUniqueId() + ".yml");
+        File file = new File("plugins/AuthTG/users/" + player.getUniqueId() + ".yml");
         YamlConfiguration userconfig = YamlConfiguration.loadConfiguration(file);
         if (file.exists() && !userconfig.contains("bypass")) {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("register_already_register")));

@@ -37,7 +37,7 @@ public class BotTelegram extends TelegramLongPollingBot {
 
     public BotTelegram() {
         YamlConfiguration config = new YamlConfiguration();
-        File file = new File("plugins/Minetelegram/config.yml");
+        File file = new File("plugins/AuthTG/config.yml");
         if (!file.exists()) {
             config.set("username", username);
             config.set("token", token);
@@ -138,7 +138,7 @@ public class BotTelegram extends TelegramLongPollingBot {
                     if (nextStep.get(update.getMessage().getChatId().toString()).equals("askpassword")) {
                         String password = update.getMessage().getText().toString().replace(" ", "").replace("\n", "");
                         String hash = PasswordHasher.hashPassword(password);
-                        File file = new File("plugins/Minetelegram/users/" + playerUUID.get(update.getMessage().getChatId().toString()) + ".yml");
+                        File file = new File("plugins/AuthTG/users/" + playerUUID.get(update.getMessage().getChatId().toString()) + ".yml");
                         YamlConfiguration userconfig = YamlConfiguration.loadConfiguration(file);
                         if (hash.equals(userconfig.getString("password"))) {
                             User.register(update.getMessage(), playerUUID.get(update.getMessage().getChatId().toString()));
@@ -207,7 +207,7 @@ public class BotTelegram extends TelegramLongPollingBot {
                 this.deleteMessage(update.getCallbackQuery().getMessage());
                 Player player = Bukkit.getPlayer(playername);
                 player.resetTitle();
-                File file = new File("plugins/Minetelegram/users/" + player.getUniqueId() + ".yml");
+                File file = new File("plugins/AuthTG/users/" + player.getUniqueId() + ".yml");
                 YamlConfiguration userconfig = YamlConfiguration.loadConfiguration(file);
                 if (update.getMessage() != null && !userconfig.getString("username").equals(update.getMessage().getChat().getUserName())) {
                     userconfig.set("username", update.getMessage().getChat().getUserName());

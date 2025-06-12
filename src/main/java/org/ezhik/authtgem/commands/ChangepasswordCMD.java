@@ -18,7 +18,7 @@ public class ChangepasswordCMD implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         Player player = (Player) commandSender;
         YamlConfiguration userconfig = new YamlConfiguration();
-        File file = new File("plugins/Minetelegram/users/" + player.getUniqueId() + ".yml");
+        File file = new File("plugins/AuthTG/users/" + player.getUniqueId() + ".yml");
         if (strings.length == 3) {
             try {
                 userconfig.load(file);

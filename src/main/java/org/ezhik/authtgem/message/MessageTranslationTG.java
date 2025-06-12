@@ -15,7 +15,7 @@ import java.util.LinkedHashMap;
 public class MessageTranslationTG extends LinkedHashMap<String, String> {
 
     public  MessageTranslationTG() {
-        File configfile = new File("plugins/Minetelegram/messages/messageTG_RU.yml");
+        File configfile = new File("plugins/AuthTG/messages/messageTG_RU.yml");
         YamlConfiguration messageconfig = new YamlConfiguration();
         try {
             messageconfig.load(configfile);

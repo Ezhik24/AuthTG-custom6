@@ -22,7 +22,7 @@ public class SetPasswordCMD implements CommandExecutor {
             return false;
         }
         Player player = Bukkit.getPlayer(strings[0]);
-        File file = new File("plugins/Minetelegram/users/" + player.getUniqueId() + ".yml");
+        File file = new File("plugins/AuthTG/users/" + player.getUniqueId() + ".yml");
         YamlConfiguration userconfig = YamlConfiguration.loadConfiguration(file);
         if (!(strings.length == 3)) {
             commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("setpassword_wrong_command")));

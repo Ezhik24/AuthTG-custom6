@@ -30,7 +30,7 @@ public class CodeCMD implements CommandExecutor {
         }
         Player player = (Player) commandSender;
         YamlConfiguration userconf = new YamlConfiguration();
-        File file = new File("plugins/Minetelegram/users/" + player.getUniqueId() + ".yml");
+        File file = new File("plugins/AuthTG/users/" + player.getUniqueId() + ".yml");
         if (strings[0].equals(code.get(player.getUniqueId()))) {
             if (AuthTGEM.bot.authNecessarily) {
                 FreezerEvent.unfreezeplayer(player.getName());

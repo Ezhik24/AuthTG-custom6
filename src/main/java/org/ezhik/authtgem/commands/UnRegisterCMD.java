@@ -17,7 +17,7 @@ public class UnRegisterCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         Player player = (Player) commandSender;
-        File file = new File("plugins/Minetelegram/users/" + player.getUniqueId() + ".yml");
+        File file = new File("plugins/AuthTG/users/" + player.getUniqueId() + ".yml");
         YamlConfiguration userconfig = YamlConfiguration.loadConfiguration(file);
         if (strings.length == 0) {
             if (userconfig.getBoolean("unregister")) {
@@ -38,7 +38,7 @@ public class UnRegisterCMD implements CommandExecutor {
         if (strings.length == 1) {
             if (player.hasPermission("minetelegram.unregister")) {
                 Player player1 = Bukkit.getPlayer(strings[0]);
-                File file1 = new File("plugins/Minetelegram/users/" + player1.getUniqueId() + ".yml");
+                File file1 = new File("plugins/AuthTG/users/" + player1.getUniqueId() + ".yml");
                 YamlConfiguration config = YamlConfiguration.loadConfiguration(file1);
                 if (config.getBoolean("unregister")) {
                     file1.delete();

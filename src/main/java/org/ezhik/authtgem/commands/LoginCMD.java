@@ -24,7 +24,7 @@ public class LoginCMD implements CommandExecutor {
             return false;
         }
         Player p = (Player) commandSender;
-        File file = new File("plugins/Minetelegram/users/" + p.getUniqueId() + ".yml");
+        File file = new File("plugins/AuthTG/users/" + p.getUniqueId() + ".yml");
         YamlConfiguration userconfig = YamlConfiguration.loadConfiguration(file);
         if (!userconfig.getString("password").equals(PasswordHasher.hashPassword(strings[0]))) {
             p.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_wrong_password")));
