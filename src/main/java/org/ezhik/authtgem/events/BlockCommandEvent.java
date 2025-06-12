@@ -27,7 +27,7 @@ public class BlockCommandEvent implements Listener {
             if (player.hasPermission("ab.ban.perma") && !FreezerEvent.isFreeze(player)) {
                 String[] args = event.getMessage().split(" ");
                 if (args.length == 4) {
-                    AuthTGEM.bot.sendMessageThread(AuthTGEM.bot.adminChatID, AuthTGEM.bot.threadChatID, "[Бот] На сервере было выдан бан \nИгрок: " + args[1] + "\nПричина: " + args[3] + "\nДлительность: " + args[2]);
+                    AuthTGEM.bot.sendMessageThread(AuthTGEM.bot.adminChatID, AuthTGEM.bot.threadChatID, AuthTGEM.messageMC.getBanPlayerName(args[0],args[2],args[1]));
                 }
             }
         }
@@ -35,7 +35,7 @@ public class BlockCommandEvent implements Listener {
             if (player.hasPermission("ab.mute.perma")) {
                 String[] args = event.getMessage().split(" ");
                 if (args.length == 4) {
-                    AuthTGEM.bot.sendMessageThread(AuthTGEM.bot.adminChatID, AuthTGEM.bot.threadChatID, "[Бот] На сервере было выдан мут \nИгрок: " + args[1] + "\nПричина: " + args[3] + "\nДлительность: " + args[2]);
+                    AuthTGEM.bot.sendMessageThread(AuthTGEM.bot.adminChatID, AuthTGEM.bot.threadChatID, AuthTGEM.messageMC.getMutePlayerName(args[0],args[2],args[1]));
                 }
             }
         }
@@ -43,7 +43,7 @@ public class BlockCommandEvent implements Listener {
             if (player.hasPermission("ab.warn.perma")) {
                 String[] args = event.getMessage().split(" ");
                 if (args.length == 4) {
-                    AuthTGEM.bot.sendMessageThread(AuthTGEM.bot.adminChatID, AuthTGEM.bot.threadChatID, "[Бот] На сервере было выдан варн \nИгрок: " + args[1] + "\nПричина: " + args[3] + "\nДлительность: " + args[2]);
+                    AuthTGEM.bot.sendMessageThread(AuthTGEM.bot.adminChatID, AuthTGEM.bot.threadChatID, AuthTGEM.messageMC.getWarnPlayerName(args[0],args[2],args[1]));
                 }
             }
         }

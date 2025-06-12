@@ -30,7 +30,7 @@ public class OnJoinEvent implements Listener {
             System.out.println("[AuthTG] Please, download GeyserMC and floodgate | Пожалуйста,загрузить GeyserMC и floodgate");
         }
         if (userconfig.getBoolean("active") && userconfig.getString("ipAddress") != null && userconfig.getString("ipAddress").equals(p.getAddress().getAddress().toString())) {
-            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f&l[&b&lMT&f&l] &a&lУспешная авторизация"));
+            p.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_successful_login")));
         } else {
             FreezerEvent.freezeplayer(p.getName());
             if (api != null && api.isBedrockPlayer(p.getUniqueId())) {
@@ -40,6 +40,7 @@ public class OnJoinEvent implements Listener {
                     p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("account_auth_nessery1_bed")), AuthTGEM.messageMC.get("account_auth_nessery2_bed"), 0, 10000000, 0);
                     String code = User.generateConfirmationCode();
                     MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.getCodeBedrock(code)));
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.getCodeBedrock(code)));
                     BotTelegram.bedrockPlayer.put(p.getUniqueId(), code);
                     try {
                         userconfig.save(file);
@@ -53,9 +54,11 @@ public class OnJoinEvent implements Listener {
                 if (userconfig.contains("password")) {
                     MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_message")));
                     p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_title_login_s1")), AuthTGEM.messageMC.get("login_title_login_s2"), 20, 10000000, 0);
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_message")));
                 } else {
                     MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("register_message")));
                     p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("register_title_s1")), AuthTGEM.messageMC.get("register_title_s2"), 20, 10000000, 0);
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("register_message")));
                 }
                 if (user != null) {
                     user.sendMessage(AuthTGEM.messageTG.get("user_login"));

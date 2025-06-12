@@ -103,7 +103,10 @@ public class MessageTranslationMC extends LinkedHashMap<String, String> {
             this.put("account_auth_nessery1_bed","&c&lПривяжи аккаунт");
             this.put("account_auth_nessery2_bed", "прочитай чат");
             this.put("account_auth_nessery_message_bed", "&f&l[&b&lMT&f&l] Привяжите аккаунт,написа боту код: {CODE}");
-            File newconfigfile = new File("plugins/Minetelegram/messages/messageMC_RU.yml");
+            this.put("ban", "[Бот] На сервере было выдан бан {BR} Игрок: {PLAYER} {BR} Причина: {REASON} {BR} Длительность: {TIME}");
+            this.put("mute", "[Бот] На сервере было выдан мут {BR} Игрок: {PLAYER} {BR} Причина: {REASON} {BR} Длительность: {TIME}");
+            this.put("warn", "[Бот] На сервере было выдан варн {BR} Игрок: {PLAYER} {BR} Причина: {REASON} {BR} Длительность: {TIME}");
+            File newconfigfile = new File("plugins/AuthTG/messages/messageMC_RU.yml");
             YamlConfiguration newmessageconfig = new YamlConfiguration();
             for (String key : this.keySet()) {
                 newmessageconfig.set(key, this.get(key));
@@ -128,6 +131,16 @@ public class MessageTranslationMC extends LinkedHashMap<String, String> {
     public String getSetpasswordPlayerName(String[] strings) {
         Player player = Bukkit.getPlayer(strings[0]);
         return this.get("setpassword_succesfly_chanpass").replace("{PLAYER}",player.getName());
+    }
+
+    public String getBanPlayerName(String playername, String reason, String time) {
+        return this.get("ban").replace("{PLAYER}", playername).replace("{REASON}", reason).replace("{TIME}", time);
+    }
+    public String getMutePlayerName(String playername, String reason, String time) {
+        return this.get("mute").replace("{PLAYER}", playername).replace("{REASON}", reason).replace("{TIME}", time);
+    }
+    public String getWarnPlayerName(String playername, String reason, String time) {
+        return this.get("warn").replace("{PLAYER}", playername).replace("{REASON}", reason).replace("{TIME}", time);
     }
 
     public String getFriendNameRemove(String friendname) {

@@ -65,7 +65,7 @@ public class User {
         Random random = new Random();
         String characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuilder code = new StringBuilder();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 4; i++) {
             int randomIndex = random.nextInt(characters.length());
             code.append(characters.charAt(randomIndex));
         }

@@ -8,6 +8,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.ezhik.authtgem.AuthTGEM;
+import org.ezhik.authtgem.BotTelegram;
 import org.ezhik.authtgem.PasswordHasher;
 import org.ezhik.authtgem.User;
 import org.ezhik.authtgem.events.FreezerEvent;
@@ -45,7 +46,11 @@ public class LoginCMD implements CommandExecutor {
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_who_entered")));
                 p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_title_tg_s1color")) + AuthTGEM.messageMC.get("login_title_tg_s1"), AuthTGEM.messageMC.get("login_title_tg_s2"), 20, 1000000000, 0);
             } else {
-                p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("account_auth_nessery1")), AuthTGEM.messageMC.get("account_auth_nessery2"), 0,10000000,0);
+                String code = User.generateConfirmationCode();
+                p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("account_auth_nessery1_bed")), AuthTGEM.messageMC.get("account_auth_nessery2_bed"), 0,10000000,0);
+                MuterEvent.mute(p.getName(), ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.getCodeBedrock(code)));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.getCodeBedrock(code)));
+                BotTelegram.bedrockPlayer.put(p.getUniqueId(), code);
             }
         }else {
             if (user != null) {
