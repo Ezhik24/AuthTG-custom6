@@ -63,7 +63,7 @@ public class User {
 
     public static String generateConfirmationCode() {
         Random random = new Random();
-        String characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String characters = "0123456789";
         StringBuilder code = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             int randomIndex = random.nextInt(characters.length());
@@ -106,7 +106,7 @@ public class User {
     public static void registerBedrock(Message message, UUID uuid) {
         Player p = Bukkit.getPlayer(uuid);
         YamlConfiguration userconfig = new YamlConfiguration();
-        File file = new File("plugins/Minetelegram/users/" + uuid + ".yml");
+        File file = new File("plugins/AuthTG/users/" + uuid + ".yml");
         try {
             userconfig.load(file);
         } catch (IOException e) {
@@ -118,7 +118,7 @@ public class User {
         userconfig.set("username", message.getChat().getUserName());
         userconfig.set("firstname", message.getChat().getFirstName());
         userconfig.set("lastname", message.getChat().getLastName());
-        userconfig.set("active", false);
+        userconfig.set("active", true);
         userconfig.set("twofactor", false);
         try {
             userconfig.save(file);

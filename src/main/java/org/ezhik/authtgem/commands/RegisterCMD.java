@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.ezhik.authtgem.AuthTGEM;
 import org.ezhik.authtgem.BotTelegram;
 import org.ezhik.authtgem.PasswordHasher;
+import org.ezhik.authtgem.User;
 import org.ezhik.authtgem.events.FreezerEvent;
 import org.ezhik.authtgem.events.MuterEvent;
 
@@ -52,7 +53,11 @@ public class RegisterCMD implements CommandExecutor {
                 MuterEvent.unmute(player.getName());
                 return true;
             }
-            player.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("account_auth_nessery1")), AuthTGEM.messageMC.get("account_auth_nessery2"), 0,10000000,0);
+            player.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("account_auth_nessery1_bed")), AuthTGEM.messageMC.get("account_auth_nessery2_bed"), 0,10000000,0);
+            String code = User.generateConfirmationCode();
+            MuterEvent.mute(player.getName(), ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.getCodeBedrock(code)));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.getCodeBedrock(code)));
+            BotTelegram.bedrockPlayer.put(player.getUniqueId(), code);
         } else {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("register_successful_register")));
             player.resetTitle();

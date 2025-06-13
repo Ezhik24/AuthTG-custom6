@@ -65,8 +65,6 @@ public class OnJoinEvent implements Listener {
                     for (User u : user.getUnicFriends()) {
                         u.sendMessageB(AuthTGEM.messageTG.getPNFriendOnJoin(p.getPlayer()), p.getName());
                     }
-                } else {
-                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("joinplayer_tgasign")));
                 }
             }
         }
