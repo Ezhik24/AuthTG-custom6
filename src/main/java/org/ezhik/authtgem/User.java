@@ -128,6 +128,7 @@ public class User {
         FreezerEvent.unfreezeplayer(p.getName());
         MuterEvent.unmute(p.getName());
         p.resetTitle();
+        p.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("code_account_activated")));
     }
 
 

@@ -41,7 +41,7 @@ public class LoginCMD implements CommandExecutor {
                 userconfig.set("ipAddress", p.getAddress().getAddress().toString());
                 return true;
             }
-            if (userconfig.getBoolean("active")) {
+            if (userconfig.getBoolean("twofactor")) {
                 user.sendLoginAccepted(AuthTGEM.messageTG.get("login_who_entered"));
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_who_entered")));
                 p.sendTitle(ChatColor.translateAlternateColorCodes('&', AuthTGEM.messageMC.get("login_title_tg_s1color")) + AuthTGEM.messageMC.get("login_title_tg_s1"), AuthTGEM.messageMC.get("login_title_tg_s2"), 20, 1000000000, 0);
